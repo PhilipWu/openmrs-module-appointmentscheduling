@@ -56,16 +56,20 @@ statusButtons.endConsultButton = endConsult;
 statusButtons.missButton = miss;
 statusButtons.cancelButton = cancel;
 
-function updateStatusButtonsAvailabilty(appointmentStatus){
+function updateStatusButtonsAvailabilty(appointmentStatus){		
+
 	appointmentStatus = appointmentStatus.toLowerCase();
 	appointmentStatus = appointmentStatus.replace("-","");
-	
-	for(var buttonName in statusButtons){
-		if(!statusButtons[buttonName][appointmentStatus])
-			$j('#'+buttonName).attr("disabled", "disabled");
-		else
-			$j('#'+buttonName).attr("disabled", "");
-	}
+
+	for(var buttonName in statusButtons){		
+		var buttonEl = document.getElementById(buttonName);
+		
+		if(!statusButtons[buttonName][appointmentStatus]) {
+			buttonEl.setAttribute('disabled', 'disabled');			
+		} else {			
+			buttonEl.removeAttribute("disabled");
+		}
+	}	
 }
 
 //Without knowing the selected line (for example on posts)
